@@ -53,7 +53,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined, // myself given workers: process.env.CI ? 1 : 2 or 1 : 1 or 5 : 1,
+  workers: process.env.CI ? 5 : 1, // myself given workers: process.env.CI ? 1 : undefined or 1 : 2 or 1 : 1 or 5 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   // reporter: 'html',
   reporter: [['html'], ["line"], ["allure-playwright"]],
