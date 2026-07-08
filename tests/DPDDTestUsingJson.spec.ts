@@ -25,7 +25,8 @@ for(let product of products){
         await expect(dp.addToCartMessage).toHaveText(product.successMessage)
     })
 
-    test(`Search and view product details for ${product.productName}`, {tag: ['@smoke', '@regression']}, async ()=>{
+    // test(`Search and view product details for ${product.productName}`, {tag: ['@smoke', '@regression']}, async ()=>{
+    test(`Search and view product details for ${product.productName}`, async ()=>{
         await dp.searchProduct(product.productName, 0)
         await expect(dp.viewPageProductName).toHaveText(product.productName)
         await expect(dp.viewPageProductPrice).toHaveText(dp.homePageProductPrice)
