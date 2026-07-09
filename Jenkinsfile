@@ -20,8 +20,10 @@ pipeline {
                 script {
                     if (isUnix()) {
                         sh 'npm ci'
+                        sh 'npx playwright install --with-deps'
                     } else {
                         bat 'npm ci'
+                        bat 'npx playwright install'
                     }
                 }
             }
