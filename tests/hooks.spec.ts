@@ -57,3 +57,4 @@ test.beforeAll(async ()=>{
 */
 
 
+// groovy - npm install - npm run smokeTest - Allure

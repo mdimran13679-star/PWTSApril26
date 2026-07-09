@@ -27,7 +27,7 @@ pipeline {
             }
         }
 
-        stage('Run Playwright Tests') {
+        stage('Run Playwright tests') {
             steps {
                 script {
                     if (isUnix()) {
@@ -38,13 +38,51 @@ pipeline {
                 }
             }
         }
+
+        stage('Generate Allure report') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh '''
+                            if [ -d "$ALLURE_RESULTS_DIR" ]; then
+                                npx allure generate "$ALLURE_RESULTS_DIR" --clean -o "$ALLURE_REPORT_DIR"
+                            else
+                                echo "Allure results directory not found"
+                                exit 1
+                            fi
+                        '''
+                    } else {
+                        bat '''
+                            if exist "%ALLURE_RESULTS_DIR%" (
+                                npx allure generate "%ALLURE_RESULTS_DIR%" --clean -o "%ALLURE_REPORT_DIR%"
+                            ) else (
+                                echo Allure results directory not found
+                                exit /b 1
+                            )
+                        '''
+                    }
+                }
+            }
+        }
     }
 
     post {
         always {
-            script {
-                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-            }
+            archiveArtifacts artifacts: 'allure-results/**, allure-report/**, test-results/**, playwright-report/**', allowEmptyArchive: true
+            publishHTML(target: [
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'allure-report',
+                reportFiles: 'index.html',
+                reportName: 'Allure Report'
+            ])
+        }
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed. Check test logs and Allure results.'
         }
     }
 }
