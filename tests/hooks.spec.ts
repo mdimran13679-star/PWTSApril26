@@ -58,3 +58,23 @@ test.beforeAll(async ()=>{
 
 
 // groovy - npm install - npm run smokeTest - Allure
+
+
+// MCP - Model Context Protocol
+
+// AI - Articificial Intelligence
+// LLM - Large Language Model
+
+// Playwright MCP
+// Playwright Agent 
+
+// Prompt Engineering - 3 Cs - Context, constraint, Clarity
+
+// Token - every 4 chars = 1 Token - Question/Response - 
+
+// Login
+// Submit
+
+// npx playwright init-agents --loop=vscode -  To setup the Playwright Agent
+// in the project
+// npx playwright init-agents --loop=vscode

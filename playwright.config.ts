@@ -69,7 +69,7 @@ export default defineConfig({
     trace: 'on',
     screenshot: 'on',
     video: 'on',
-    headless: true
+    headless: false
     // headless: false // added in organization will use headless mode as false
   },
 
